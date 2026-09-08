@@ -114,7 +114,7 @@ namespace ocs2
     }
 
     void MarkerAutoPositionWrapper::leftEndEffectorPoseCallback(
-        const geometry_msgs::msg::PoseStamped::ConstSharedPtr& msg)
+        geometry_msgs::msg::PoseStamped::ConstSharedPtr msg)
     {
         if (bool shouldUpdate = processPoseCallback(msg, true); !shouldUpdate)
         {
@@ -131,7 +131,7 @@ namespace ocs2
     }
 
     void MarkerAutoPositionWrapper::rightEndEffectorPoseCallback(
-        const geometry_msgs::msg::PoseStamped::ConstSharedPtr& msg)
+        geometry_msgs::msg::PoseStamped::ConstSharedPtr msg)
     {
         bool shouldUpdate = processPoseCallback(msg, false);
         if (!shouldUpdate)
@@ -142,7 +142,7 @@ namespace ocs2
         updateRightArmMarkerPosition(msg);
     }
 
-    void MarkerAutoPositionWrapper::observationCallback(const ocs2_msgs::msg::MpcObservation::ConstSharedPtr& msg)
+    void MarkerAutoPositionWrapper::observationCallback(ocs2_msgs::msg::MpcObservation::ConstSharedPtr msg)
     {
         auto currentTime = node_->now();
         lastMpcObservationTime_ = currentTime;

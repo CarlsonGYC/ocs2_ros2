@@ -54,7 +54,7 @@ namespace {
 
     private:
         void mpcPoicyCallback(
-            const ocs2_msgs::msg::MpcFlattenedController::ConstSharedPtr &policyMsg) {
+            ocs2_msgs::msg::MpcFlattenedController::ConstSharedPtr policyMsg) {
             mpcPerformanceIndicesPublisher_->publish(policyMsg->performance_indices);
         }
 

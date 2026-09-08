@@ -41,6 +41,51 @@ OCS2_ROS2 is developed based on [OCS2](https://github.com/leggedrobotics/ocs2), 
 
 ## 2. Installation
 
+### ROS 2 Foxy on Jetson (`feat/foxy` branch)
+
+The Foxy compatibility work targets `ocs2_mobile_manipulator_ros` and its
+dependencies on Ubuntu 20.04 / ARM64 with GCC 9 and Pinocchio 2.6.17. It does
+not cover every OCS2 example or the separate `arms_ros2_control` repository.
+
+Python-binding examples require pybind11. The preferred Focal packages are
+`pybind11-dev` and `python3-pybind11`; when sudo is unavailable, the CMake
+files also discover a user-installed Python module:
+
+```bash
+python3 -m pip install --user pybind11
+```
+
+From the workspace root, with the required dependencies already installed:
+
+```bash
+source /opt/ros/foxy/setup.bash
+MAKEFLAGS="-j2" CMAKE_BUILD_PARALLEL_LEVEL=2 colcon build \
+  --packages-up-to ocs2_mobile_manipulator_ros \
+  --symlink-install \
+  --parallel-workers 1 \
+  --cmake-args \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_CXX_STANDARD=17 \
+    -DBUILD_TESTING=OFF
+```
+
+Foxy subscription callbacks must take `Message::ConstSharedPtr` by value,
+not `const Message::ConstSharedPtr&` or `const Message&`. Keep declarations
+and definitions consistent when changing member callbacks. Internal helper
+functions and interactive-marker feedback callbacks can still use references.
+The MPC reset service also takes request/response shared pointers by value
+to match Foxy's service callback signatures.
+Pinocchio frame fields, distance headers, and TF broadcaster headers are
+selected to accommodate the older libraries without removing the newer APIs.
+
+Validation on Jetson (L4T 35.3.1, Ubuntu 20.04, GCC 9, ROS 2 Foxy,
+Pinocchio 2.6.17): the command above built all 18 selected packages. The
+callback-queue example also exchanged messages locally. CMake still warns
+about overlapping system/ROS URDFDOM library paths; with the Foxy and workspace
+environments sourced, `ldd` found no missing libraries in the four mobile
+manipulator executables. Full simulation and hardware operation are not yet
+validated on Foxy.
+
 ### 2.1 Prerequisites
 
 The OCS2 library is written in C++17. It is tested under Ubuntu with library versions as provided in the package

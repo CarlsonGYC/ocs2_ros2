@@ -47,8 +47,8 @@ namespace ocs2 {
 
     void RosReferenceManager::subscribe(const rclcpp::Node::SharedPtr &node) {
         // ModeSchedule
-        auto modeScheduleCallback = [this](const ocs2_msgs::msg::ModeSchedule &msg) {
-            auto modeSchedule = ros_msg_conversions::readModeScheduleMsg(msg);
+        auto modeScheduleCallback = [this](ocs2_msgs::msg::ModeSchedule::ConstSharedPtr msg) {
+            auto modeSchedule = ros_msg_conversions::readModeScheduleMsg(*msg);
             referenceManagerPtr_->setModeSchedule(std::move(modeSchedule));
         };
         mode_schedule_subscriber_ =
@@ -57,9 +57,9 @@ namespace ocs2 {
 
         // TargetTrajectories
         auto targetTrajectoriesCallback =
-                [this](const ocs2_msgs::msg::MpcTargetTrajectories &msg) {
+                [this](ocs2_msgs::msg::MpcTargetTrajectories::ConstSharedPtr msg) {
             auto targetTrajectories =
-                    ros_msg_conversions::readTargetTrajectoriesMsg(msg);
+                    ros_msg_conversions::readTargetTrajectoriesMsg(*msg);
             referenceManagerPtr_->setTargetTrajectories(
                 std::move(targetTrajectories));
         };
@@ -69,8 +69,8 @@ namespace ocs2 {
     }
 
     void RosReferenceManager::subscribe(const rclcpp_lifecycle::LifecycleNode::SharedPtr &node) {
-        auto modeScheduleCallback = [this](const ocs2_msgs::msg::ModeSchedule &msg) {
-            auto modeSchedule = ros_msg_conversions::readModeScheduleMsg(msg);
+        auto modeScheduleCallback = [this](ocs2_msgs::msg::ModeSchedule::ConstSharedPtr msg) {
+            auto modeSchedule = ros_msg_conversions::readModeScheduleMsg(*msg);
             referenceManagerPtr_->setModeSchedule(std::move(modeSchedule));
         };
         mode_schedule_subscriber_ =
@@ -79,9 +79,9 @@ namespace ocs2 {
 
         // TargetTrajectories
         auto targetTrajectoriesCallback =
-                [this](const ocs2_msgs::msg::MpcTargetTrajectories &msg) {
+                [this](ocs2_msgs::msg::MpcTargetTrajectories::ConstSharedPtr msg) {
             auto targetTrajectories =
-                    ros_msg_conversions::readTargetTrajectoriesMsg(msg);
+                    ros_msg_conversions::readTargetTrajectoriesMsg(*msg);
             referenceManagerPtr_->setTargetTrajectories(
                 std::move(targetTrajectories));
         };

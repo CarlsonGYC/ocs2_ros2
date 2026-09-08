@@ -100,7 +100,7 @@ namespace ocs2 {
          * @param [in] msg: A constant pointer to the message
          */
         void mpcPolicyCallback(
-            const ocs2_msgs::msg::MpcFlattenedController::ConstSharedPtr &msg);
+            ocs2_msgs::msg::MpcFlattenedController::ConstSharedPtr msg);
 
         /**
          * Helper function to read a MPC policy message.

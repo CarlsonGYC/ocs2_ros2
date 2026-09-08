@@ -137,7 +137,7 @@ namespace ocs2 {
          * @param [in] msg: The observation message.
          */
         void mpcObservationCallback(
-            const ocs2_msgs::msg::MpcObservation::ConstSharedPtr &msg);
+            ocs2_msgs::msg::MpcObservation::ConstSharedPtr msg);
 
     protected:
         /*

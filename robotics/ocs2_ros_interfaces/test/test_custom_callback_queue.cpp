@@ -35,8 +35,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // Global queue: will be available as a member variable
 rclcpp::CallbackGroup::SharedPtr callback_group_subscriber;
 
-void chatterCallback(const std_msgs::msg::String& msg) {
-  printf("I heard: [%s]\n", msg.data.c_str());
+void chatterCallback(std_msgs::msg::String::ConstSharedPtr msg) {
+  printf("I heard: [%s]\n", msg->data.c_str());
 }
 
 int main(int argc, char* argv[]) {

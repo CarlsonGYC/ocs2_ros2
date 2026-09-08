@@ -35,7 +35,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <pinocchio/multibody/geometry.hpp>
 #include <pinocchio/multibody/model.hpp>
 #include <pinocchio/parsers/urdf.hpp>
+// Pinocchio 2.x provides distance algorithms in algorithm/geometry.hpp above.
+#if __has_include(<pinocchio/collision/distance.hpp>)
 #include <pinocchio/collision/distance.hpp>
+#endif
 
 #include <sstream>
 

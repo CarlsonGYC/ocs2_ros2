@@ -123,7 +123,7 @@ namespace ocs2
 
     void UnifiedTargetTrajectoriesInteractiveMarker::setupObservationSubscriber()
     {
-        auto observationCallback = [this](const ocs2_msgs::msg::MpcObservation::ConstSharedPtr& msg)
+        auto observationCallback = [this](ocs2_msgs::msg::MpcObservation::ConstSharedPtr msg)
         {
             std::lock_guard lock(latestObservationMutex_);
             latestObservation_ = ros_msg_conversions::readObservationMsg(*msg);

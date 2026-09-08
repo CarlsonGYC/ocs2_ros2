@@ -12,6 +12,7 @@ set(ament_dependencies
         ocs2_msgs
         ocs2_mpc
         std_msgs
+        sensor_msgs
         visualization_msgs
         geometry_msgs
         interactive_markers
@@ -56,6 +57,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
         ${ocs2_msgs_TARGETS}
         ${ocs2_mpc_TARGETS}
         ${std_msgs_TARGETS}
+        ${sensor_msgs_TARGETS}
         ${visualization_msgs_TARGETS}
         ${geometry_msgs_TARGETS}
         ${interactive_markers_TARGETS}

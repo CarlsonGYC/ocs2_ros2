@@ -201,7 +201,7 @@ namespace ocs2 {
 
 
     void MRT_ROS_Interface::mpcPolicyCallback(
-        const ocs2_msgs::msg::MpcFlattenedController::ConstSharedPtr &msg) {
+        ocs2_msgs::msg::MpcFlattenedController::ConstSharedPtr msg) {
         // read new policy and command from msg
         auto commandPtr = std::make_unique<CommandData>();
         auto primalSolutionPtr = std::make_unique<PrimalSolution>();

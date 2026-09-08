@@ -8,6 +8,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 find_package(ament_cmake REQUIRED)
 find_package(tf2_ros REQUIRED)
+find_package(sensor_msgs REQUIRED)
 find_package(urdf REQUIRED)
 find_package(kdl_parser REQUIRED)
 find_package(robot_state_publisher REQUIRED)
@@ -31,6 +32,7 @@ target_compile_definitions(${PROJECT_NAME} PUBLIC ${OCS2_CXX_DEFINITIONS})
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
         ${tf2_ros_TARGETS}
+        ${sensor_msgs_TARGETS}
         ${urdf_TARGETS}
         ${kdl_parser_TARGETS}
         ${robot_state_publisher_TARGETS}

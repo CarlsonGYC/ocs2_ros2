@@ -228,7 +228,7 @@ namespace ocs2 {
 
 
     void MPC_ROS_Interface::mpcObservationCallback(
-        const ocs2_msgs::msg::MpcObservation::ConstSharedPtr &msg) {
+        ocs2_msgs::msg::MpcObservation::ConstSharedPtr msg) {
         std::lock_guard<std::mutex> resetLock(resetMutex_);
 
         if (!resetRequestedEver_.load()) {
@@ -340,8 +340,8 @@ namespace ocs2 {
         // MPC reset service server
         mpcResetServiceServer_ = node_->create_service<ocs2_msgs::srv::Reset>(
             topicPrefix_ + "_mpc_reset",
-            [this](const std::shared_ptr<ocs2_msgs::srv::Reset::Request> &request,
-                   const std::shared_ptr<ocs2_msgs::srv::Reset::Response> &response) {
+            [this](std::shared_ptr<ocs2_msgs::srv::Reset::Request> request,
+                   std::shared_ptr<ocs2_msgs::srv::Reset::Response> response) {
                 return resetMpcCallback(request, response);
             });
 

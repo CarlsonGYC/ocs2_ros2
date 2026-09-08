@@ -27,6 +27,7 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ******************************************************************************/
 #include <iomanip>
+#include <pinocchio/config.hpp>
 
 #include <ocs2_pinocchio_interface/PinocchioInterface.h>
 #include <ocs2_pinocchio_interface/implementation/PinocchioInterface.h>
@@ -70,7 +71,11 @@ namespace ocs2
         {
             os << std::setw(20) << model.frames[k].name << ":  ";
             os << " ID = " << k;
+#if PINOCCHIO_VERSION_AT_LEAST(3, 0, 0)
             os << ", parent = " << model.frames[k].parentJoint;
+#else
+            os << ", parent = " << model.frames[k].parent;
+#endif
             os << ", type = ";
 
             std::string frameType;

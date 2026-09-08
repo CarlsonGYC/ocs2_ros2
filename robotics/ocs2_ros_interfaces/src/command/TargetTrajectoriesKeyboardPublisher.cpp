@@ -47,7 +47,7 @@ namespace ocs2 {
               std::move(commandLineToTargetTrajectoriesFun)) {
         // observation subscriber
         auto observationCallback =
-                [this](const ocs2_msgs::msg::MpcObservation::ConstSharedPtr &msg) {
+                [this](ocs2_msgs::msg::MpcObservation::ConstSharedPtr msg) {
             std::lock_guard<std::mutex> lock(latestObservationMutex_);
             latestObservation_ = ros_msg_conversions::readObservationMsg(*msg);
         };

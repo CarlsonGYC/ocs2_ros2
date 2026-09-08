@@ -55,19 +55,19 @@ namespace ocs2 {
          * Left arm end effector pose callback (dual arm mode)
          * @param msg Pose message
          */
-        void leftEndEffectorPoseCallback(const geometry_msgs::msg::PoseStamped::ConstSharedPtr& msg);
+        void leftEndEffectorPoseCallback(geometry_msgs::msg::PoseStamped::ConstSharedPtr msg);
 
         /**
          * Right arm end effector pose callback (dual arm mode)
          * @param msg Pose message
          */
-        void rightEndEffectorPoseCallback(const geometry_msgs::msg::PoseStamped::ConstSharedPtr& msg);
+        void rightEndEffectorPoseCallback(geometry_msgs::msg::PoseStamped::ConstSharedPtr msg);
 
         /**
          * MPC observation callback
          * @param msg MPC observation message
          */
-        void observationCallback(const ocs2_msgs::msg::MpcObservation::ConstSharedPtr& msg);
+        void observationCallback(ocs2_msgs::msg::MpcObservation::ConstSharedPtr msg);
 
         /**
          * Cooldown check callback
@@ -152,4 +152,4 @@ namespace ocs2 {
         mutable std::mutex stateMutex_;
     };
 
-} // namespace ocs2 
+} // namespace ocs2

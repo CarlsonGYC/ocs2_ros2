@@ -11,8 +11,22 @@ if(NOT DEFINED PYTHON_INSTALL_DIR)
 endif()
 
 find_package(ament_cmake REQUIRED)
-find_package(Python COMPONENTS Interpreter Development)
-find_package(pybind11 CONFIG)
+find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
+find_package(pybind11 CONFIG QUIET)
+if(NOT pybind11_FOUND)
+    execute_process(
+            COMMAND ${Python3_EXECUTABLE} -m pybind11 --cmakedir
+            OUTPUT_VARIABLE OCS2_PYBIND11_CMAKE_DIR
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+            ERROR_QUIET
+            RESULT_VARIABLE OCS2_PYBIND11_RESULT
+    )
+    if(OCS2_PYBIND11_RESULT EQUAL 0 AND EXISTS "${OCS2_PYBIND11_CMAKE_DIR}/pybind11Config.cmake")
+        find_package(pybind11 CONFIG REQUIRED PATHS "${OCS2_PYBIND11_CMAKE_DIR}" NO_DEFAULT_PATH)
+    else()
+        message(FATAL_ERROR "pybind11 was not found. Install pybind11-dev/python3-pybind11 or install the Python pybind11 module.")
+    endif()
+endif()
 find_package(ocs2_python_interface REQUIRED)
 find_package(ocs2_ros_interfaces REQUIRED)
 find_package(onnxruntime REQUIRED)

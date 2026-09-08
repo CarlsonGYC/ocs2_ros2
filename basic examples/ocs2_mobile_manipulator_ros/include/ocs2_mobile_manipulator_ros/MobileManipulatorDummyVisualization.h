@@ -34,7 +34,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <ocs2_ros_interfaces/mrt/DummyObserver.h>
 #include <ocs2_self_collision_visualization/GeometryInterfaceVisualization.h>
 #include <ocs2_mobile_manipulator_ros/EnvironmentCollisionVisualization.h>
+#if __has_include(<tf2_ros/transform_broadcaster.hpp>)
 #include <tf2_ros/transform_broadcaster.hpp>
+#else
+#include <tf2_ros/transform_broadcaster.h>
+#endif
 
 #include <geometry_msgs/msg/pose_array.hpp>
 #include <sensor_msgs/msg/joint_state.hpp>
